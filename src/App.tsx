@@ -1,25 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useRef } from 'react';
 import './App.css';
 
 function App() {
+
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const contextRef = useRef<CanvasRenderingContext2D>(null)
+
+  useEffect(() => {
+    if (null !== canvasRef.current) {
+      const canvas = canvasRef.current
+      canvas.width = window.innerWidth * 2
+      canvas.height = window.innerHeight * 2
+      canvas.style.width = `${window.innerWidth}px`
+      canvas.style.width = `${window.innerHeight}px`
+
+      const context = canvas.getContext('2d')
+      context?.scale(2,2)
+      context.lineCap = 'round'
+      contextRef.current = context
+    }
+  }, [])
+
+  const startDrawing = () => {
+
+  }
+
+  const finishDrawing = () => {
+
+  }
+
+  const draw = () => {
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <canvas
+      onMouseDown={startDrawing}
+      onMouseUp={finishDrawing}
+      onMouseMove={draw}
+      ref={canvasRef}
+    />
   );
 }
 
