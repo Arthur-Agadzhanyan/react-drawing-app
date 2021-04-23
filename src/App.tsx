@@ -3,8 +3,8 @@ import './App.css';
 
 function App() {
 
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const contextRef = useRef<CanvasRenderingContext2D>(null)
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const contextRef = useRef<CanvasRenderingContext2D | null>(null)
 
   useEffect(() => {
     if (null !== canvasRef.current) {
@@ -15,8 +15,8 @@ function App() {
       canvas.style.width = `${window.innerHeight}px`
 
       const context = canvas.getContext('2d')
-      context?.scale(2,2)
-      context.lineCap = 'round'
+      context!.scale(2,2)
+      context!.lineCap = 'round'
       contextRef.current = context
     }
   }, [])
